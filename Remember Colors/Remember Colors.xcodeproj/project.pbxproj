@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		415200E82DBE7BA100FD4002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415200CE2DBE7B9F00FD4002 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 415200D52DBE7B9F00FD4002;
+			remoteInfo = "Remember Colors";
+		};
+		415200F22DBE7BA100FD4002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415200CE2DBE7B9F00FD4002 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 415200D52DBE7B9F00FD4002;
+			remoteInfo = "Remember Colors";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		415200D62DBE7B9F00FD4002 /* Remember Colors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Remember Colors.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		415200E72DBE7BA100FD4002 /* Remember ColorsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Remember ColorsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		415200F12DBE7BA100FD4002 /* Remember ColorsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Remember ColorsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		415200F92DBE7BA200FD4002 /* Exceptions for "Remember Colors" folder in "Remember Colors" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 415200D52DBE7B9F00FD4002 /* Remember Colors */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		415200D82DBE7B9F00FD4002 /* Remember Colors */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				415200F92DBE7BA200FD4002 /* Exceptions for "Remember Colors" folder in "Remember Colors" target */,
+			);
+			path = "Remember Colors";
+			sourceTree = "<group>";
+		};
+		415200EA2DBE7BA100FD4002 /* Remember ColorsTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Remember ColorsTests";
+			sourceTree = "<group>";
+		};
+		415200F42DBE7BA100FD4002 /* Remember ColorsUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Remember ColorsUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		415200D32DBE7B9F00FD4002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		415200E42DBE7BA100FD4002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		415200EE2DBE7BA100FD4002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		415200CD2DBE7B9F00FD4002 = {
+			isa = PBXGroup;
+			children = (
+				415200D82DBE7B9F00FD4002 /* Remember Colors */,
+				415200EA2DBE7BA100FD4002 /* Remember ColorsTests */,
+				415200F42DBE7BA100FD4002 /* Remember ColorsUITests */,
+				415200D72DBE7B9F00FD4002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		415200D72DBE7B9F00FD4002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				415200D62DBE7B9F00FD4002 /* Remember Colors.app */,
+				415200E72DBE7BA100FD4002 /* Remember ColorsTests.xctest */,
+				415200F12DBE7BA100FD4002 /* Remember ColorsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		415200D52DBE7B9F00FD4002 /* Remember Colors */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 415200FA2DBE7BA200FD4002 /* Build configuration list for PBXNativeTarget "Remember Colors" */;
+			buildPhases = (
+				415200D22DBE7B9F00FD4002 /* Sources */,
+				415200D32DBE7B9F00FD4002 /* Frameworks */,
+				415200D42DBE7B9F00FD4002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				415200D82DBE7B9F00FD4002 /* Remember Colors */,
+			);
+			name = "Remember Colors";
+			packageProductDependencies = (
+			);
+			productName = "Remember Colors";
+			productReference = 415200D62DBE7B9F00FD4002 /* Remember Colors.app */;
+			productType = "com.apple.product-type.application";
+		};
+		415200E62DBE7BA100FD4002 /* Remember ColorsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 415200FF2DBE7BA200FD4002 /* Build configuration list for PBXNativeTarget "Remember ColorsTests" */;
+			buildPhases = (
+				415200E32DBE7BA100FD4002 /* Sources */,
+				415200E42DBE7BA100FD4002 /* Frameworks */,
+				415200E52DBE7BA100FD4002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				415200E92DBE7BA100FD4002 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				415200EA2DBE7BA100FD4002 /* Remember ColorsTests */,
+			);
+			name = "Remember ColorsTests";
+			packageProductDependencies = (
+			);
+			productName = "Remember ColorsTests";
+			productReference = 415200E72DBE7BA100FD4002 /* Remember ColorsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		415200F02DBE7BA100FD4002 /* Remember ColorsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 415201022DBE7BA200FD4002 /* Build configuration list for PBXNativeTarget "Remember ColorsUITests" */;
+			buildPhases = (
+				415200ED2DBE7BA100FD4002 /* Sources */,
+				415200EE2DBE7BA100FD4002 /* Frameworks */,
+				415200EF2DBE7BA100FD4002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				415200F32DBE7BA100FD4002 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				415200F42DBE7BA100FD4002 /* Remember ColorsUITests */,
+			);
+			name = "Remember ColorsUITests";
+			packageProductDependencies = (
+			);
+			productName = "Remember ColorsUITests";
+			productReference = 415200F12DBE7BA100FD4002 /* Remember ColorsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		415200CE2DBE7B9F00FD4002 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					415200D52DBE7B9F00FD4002 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					415200E62DBE7BA100FD4002 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 415200D52DBE7B9F00FD4002;
+					};
+					415200F02DBE7BA100FD4002 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 415200D52DBE7B9F00FD4002;
+					};
+				};
+			};
+			buildConfigurationList = 415200D12DBE7B9F00FD4002 /* Build configuration list for PBXProject "Remember Colors" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 415200CD2DBE7B9F00FD4002;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 415200D72DBE7B9F00FD4002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				415200D52DBE7B9F00FD4002 /* Remember Colors */,
+				415200E62DBE7BA100FD4002 /* Remember ColorsTests */,
+				415200F02DBE7BA100FD4002 /* Remember ColorsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		415200D42DBE7B9F00FD4002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		415200E52DBE7BA100FD4002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		415200EF2DBE7BA100FD4002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		415200D22DBE7B9F00FD4002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		415200E32DBE7BA100FD4002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		415200ED2DBE7BA100FD4002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		415200E92DBE7BA100FD4002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 415200D52DBE7B9F00FD4002 /* Remember Colors */;
+			targetProxy = 415200E82DBE7BA100FD4002 /* PBXContainerItemProxy */;
+		};
+		415200F32DBE7BA100FD4002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 415200D52DBE7B9F00FD4002 /* Remember Colors */;
+			targetProxy = 415200F22DBE7BA100FD4002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		415200FB2DBE7BA200FD4002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Remember Colors/Remember_Colors.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Remember Colors/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.josi.salehi.Remember-Colors";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		415200FC2DBE7BA200FD4002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Remember Colors/Remember_Colors.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Remember Colors/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.josi.salehi.Remember-Colors";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		415200FD2DBE7BA200FD4002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		415200FE2DBE7BA200FD4002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		415201002DBE7BA200FD4002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.josi.salehi.Remember-ColorsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remember Colors.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remember Colors";
+			};
+			name = Debug;
+		};
+		415201012DBE7BA200FD4002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.josi.salehi.Remember-ColorsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remember Colors.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remember Colors";
+			};
+			name = Release;
+		};
+		415201032DBE7BA200FD4002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.josi.salehi.Remember-ColorsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Remember Colors";
+			};
+			name = Debug;
+		};
+		415201042DBE7BA200FD4002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 894UZJQAB9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.josi.salehi.Remember-ColorsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Remember Colors";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		415200D12DBE7B9F00FD4002 /* Build configuration list for PBXProject "Remember Colors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				415200FD2DBE7BA200FD4002 /* Debug */,
+				415200FE2DBE7BA200FD4002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		415200FA2DBE7BA200FD4002 /* Build configuration list for PBXNativeTarget "Remember Colors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				415200FB2DBE7BA200FD4002 /* Debug */,
+				415200FC2DBE7BA200FD4002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		415200FF2DBE7BA200FD4002 /* Build configuration list for PBXNativeTarget "Remember ColorsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				415201002DBE7BA200FD4002 /* Debug */,
+				415201012DBE7BA200FD4002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		415201022DBE7BA200FD4002 /* Build configuration list for PBXNativeTarget "Remember ColorsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				415201032DBE7BA200FD4002 /* Debug */,
+				415201042DBE7BA200FD4002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 415200CE2DBE7B9F00FD4002 /* Project object */;
+}
