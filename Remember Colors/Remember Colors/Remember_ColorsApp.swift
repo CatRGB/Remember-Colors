@@ -25,7 +25,7 @@ struct Remember_ColorsApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartUI()
         }
         .modelContainer(sharedModelContainer)
     }
