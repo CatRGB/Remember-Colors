@@ -22,6 +22,9 @@ struct ContentView: View {
     @State private var gameRunning = false
     @State private var animateSuccess: Bool = false
     
+    let delayWithNewColor: Double = 1.2
+    let delayWithoutNewColor: Double = 0.5
+    
     @StateObject private var levelManager = GameLevelManager()
     
     // Dynamisch Spaltenanzahl
@@ -54,6 +57,8 @@ struct ContentView: View {
                     ) {
                         colorButtonHandler(index)
                     }
+                    .scaleEffect(levelManager.newlyAddedColorIndex == index ? 1.2 : 1.0)
+                    .animation(.easeOut(duration: 0.5), value: levelManager.newlyAddedColorIndex)
                 }
             }
 
@@ -93,6 +98,14 @@ struct ContentView: View {
     }
     
     func startNextLevel() {
+        // Falls Level erreicht ist: Neue Farbe hinzufügen
+        var newColorAdded = false
+        if levelManager.levelThresholdsForNewColor.contains(colorSequence.count) {
+            levelManager.addNewColors()
+            newColorAdded = true
+        }
+        
+        // Die neue Farbe oder das neue Level vorbereiten
         colorSequence.append(Int.random(in: 0..<levelManager.colors.count))
         colorsToTap = []
         sequenceIndex = 0 // Wichtig: neu starten innerhalb des Levels
@@ -100,13 +113,24 @@ struct ContentView: View {
         isActionButtonEnabled = false
         infoText = "Level: \(colorSequence.count)" // Level = Anzahl Farben
         gameRunning = true
-        playSequence()
+        
+        let delay  = newColorAdded ? delayWithNewColor : delayWithNewColor
+       // Wenn neue Farbe dazu kam, erst kurze Pause für Animation
+        if newColorAdded {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                levelManager.newlyAddedColorIndex = nil
+                playSequence()
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                playSequence()
+            }
+        }
     }
     
     func playSequence() {
         if sequenceIndex < colorSequence.count {
             flash(buttonIndex: colorSequence[sequenceIndex])
-            // sequenceIndex += 1 wird innerhalb von flash() nach playSequence() aufgerufen
         } else {
             colorsToTap = colorSequence
             isUserInteractionEnabled = true
