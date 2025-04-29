@@ -22,7 +22,7 @@ struct TitleStyle: ViewModifier {
                     endPoint: .bottomTrailing
                 )
             )
-            .shadow(color: .black, radius: 10, x: 5, y: 5)
+            //.shadow(color: .black, radius: 10, x: 5, y: 5)
     }
 }
 
@@ -130,6 +130,36 @@ struct punkteShopButton: ButtonStyle {
             .foregroundColor(.white)
             .cornerRadius(10)
             .shadow(color: .yellow, radius: 5, y: 5)
+            .rotation3DEffect(
+                Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
+            )
+    }
+}
+
+struct backButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "chevron.left")
+            .padding(10)
+            .background(Color.red)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .shadow(color: .red, radius: 5, y: 5)
+            .rotation3DEffect(
+                Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
+            )
+    }
+}
+
+struct playToButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "play")
+            .padding(10)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .shadow(color: .green, radius: 5, y: 5)
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
             )

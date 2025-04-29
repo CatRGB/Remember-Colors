@@ -17,10 +17,15 @@ struct ContentView: View {
     @State private var gameEnded = false
     @State private var infoText = "Remember Colours"
     @State private var actionButtonText = "Starte das Spiel!"
+    @State private var backButton = "Zurück"
+    @State private var showBackButton: Bool = false
     @State private var isActionButtonEnabled = true
     @State private var isUserInteractionEnabled = true
     @State private var gameRunning = false
     @State private var animateSuccess: Bool = false
+    
+    @State private var navigateToStartUI = false
+    @State private var startPressed = false
     
     let delayWithNewColor: Double = 1.2
     let delayWithoutNewColor: Double = 0.5
@@ -42,46 +47,84 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
-            AnimatedInfoText(text: infoText, animateSuccess: animateSuccess)
-            
-            Spacer()
-            
-            LazyVGrid(columns: gridColumns, spacing: 20) {
-                ForEach(0..<levelManager.colors.count, id: \.self) { index in
-                    ColorButton(
-                        color: levelManager.colors[index],
-                        isHighlighted: levelManager.colorButtonStates[index],
-                        size: buttonSize,
-                        isEnabled: isUserInteractionEnabled
-                    ) {
-                        colorButtonHandler(index)
-                    }
-                    .scaleEffect(levelManager.newlyAddedColorIndex == index ? 1.2 : 1.0)
-                    .animation(.easeOut(duration: 0.5), value: levelManager.newlyAddedColorIndex)
+        ZStack {
+            // Hauptspiel UI
+            VStack(spacing: 20) {
+                if !gameEnded {
+                    AnimatedInfoText(text: infoText, animateSuccess: animateSuccess)
+                        .padding(.top, 50)
+                        .modifier(TitleStyle())
                 }
+
+                Spacer()	
+
+                if !gameEnded {
+                    LazyVGrid(columns: gridColumns, spacing: 20) {
+                        ForEach(0..<levelManager.colors.count, id: \.self) { index in
+                            ColorButton(
+                                color: levelManager.colors[index],
+                                isHighlighted: levelManager.colorButtonStates[index],
+                                size: buttonSize,
+                                isEnabled: isUserInteractionEnabled
+                            ) {
+                                colorButtonHandler(index)
+                            }
+                            .scaleEffect(levelManager.newlyAddedColorIndex == index ? 1.2 : 1.0)
+                            .animation(.easeOut(duration: 0.5), value: levelManager.newlyAddedColorIndex)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        if !gameRunning {
+                            startNextLevel()
+                        }
+                    }) {
+                        Text(actionButtonText)
+                            .padding()
+                            .background(isActionButtonEnabled ? Color.blue : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .disabled(!isActionButtonEnabled)
+                }
+            }
+            .opacity(startPressed ? 0 : 1)
+            .offset(y: startPressed ? -UIScreen.main.bounds.height : 0)
+            .animation(.easeInOut(duration: 0.5), value: startPressed)
+            .padding()
+
+            // Game Over Overlay
+            if gameEnded {
+                GameOverView(
+                    onRestart: {
+                        createNewGame()
+                    },
+                    onBackToStart: {
+                        gameEnded = false
+                        withAnimation(.easeIn(duration: 0.5)) {
+                            startPressed = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation {
+                                navigateToStartUI = true
+                            }
+                        }
+                    }
+                )
+                .zIndex(1)
             }
 
-            Spacer()
-            
-            Button(action: {
-                if !gameRunning {
-                    if gameEnded {
-                        createNewGame()
-                    } else {
-                        startNextLevel()
-                    }
-                }
-            }) {
-                Text(actionButtonText)
-                    .padding()
-                    .background(isActionButtonEnabled ? Color.blue : Color.gray)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            // Start-UI Overlay
+            if navigateToStartUI {
+                StartUI()
+                    .transition(.move(edge: .trailing))
+                    .zIndex(2)
             }
-            .disabled(!isActionButtonEnabled)
         }
-        .padding()
+        .edgesIgnoringSafeArea(.all)
+
     }
     
     func createNewGame() {
