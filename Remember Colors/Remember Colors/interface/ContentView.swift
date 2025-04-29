@@ -26,6 +26,8 @@ struct ContentView: View {
     
     @State private var navigateToStartUI = false
     @State private var startPressed = false
+    @State private var isFirstLaunch = true
+
     
     let delayWithNewColor: Double = 1.2
     let delayWithoutNewColor: Double = 0.5
@@ -75,25 +77,25 @@ struct ContentView: View {
                     }
                     
                     Spacer()
-                    
-                    Button(action: {
-                        if !gameRunning {
+                    if isActionButtonEnabled {
+                        Button(action: {
                             startNextLevel()
+                        }) {
+                            Text(actionButtonText)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
-                    }) {
-                        Text(actionButtonText)
-                            .padding()
-                            .background(isActionButtonEnabled ? Color.blue : Color.gray)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
                     }
-                    .disabled(!isActionButtonEnabled)
                 }
             }
             .opacity(startPressed ? 0 : 1)
             .offset(y: startPressed ? -UIScreen.main.bounds.height : 0)
             .animation(.easeInOut(duration: 0.5), value: startPressed)
             .padding()
+            
+            
 
             // Game Over Overlay
             if gameEnded {
@@ -123,6 +125,12 @@ struct ContentView: View {
                     .zIndex(2)
             }
         }
+        .onAppear {
+            if isFirstLaunch {
+                isFirstLaunch = false
+                startNextLevel()
+            }
+        }
         .edgesIgnoringSafeArea(.all)
 
     }
@@ -131,14 +139,20 @@ struct ContentView: View {
         colorSequence = [Int.random(in: 0..<levelManager.colors.count)]
         colorsToTap = []
         sequenceIndex = 0
-        actionButtonText = "Starte das Spiel!"
-        isActionButtonEnabled = true
-        infoText = "Level: \(sequenceIndex + 1)"
+        infoText = "Level: 1"
         levelManager.resetColors()
         currentPlayer = 0
         gameRunning = false
         gameEnded = false
+        isUserInteractionEnabled = false
+        isActionButtonEnabled = false
+        actionButtonText = ""
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            startNextLevel()
+        }
     }
+
     
     func startNextLevel() {
         // Falls Level erreicht ist: Neue Farbe hinzufügen
@@ -216,14 +230,21 @@ struct ContentView: View {
             if colorsToTap.isEmpty {
                 gameRunning = false
                 infoText = "Level \(colorSequence.count) geschafft!"
-                actionButtonText = "Weiter zum nächsten Level"
-                isActionButtonEnabled = true
-                isUserInteractionEnabled = false
                 
-                // Animation abspielen
+                let showContinueButton = colorSequence.count % 5 == 0
+                actionButtonText = showContinueButton ? "Weiter zum nächsten Level" : ""
+                isActionButtonEnabled = showContinueButton
+                isUserInteractionEnabled = false
+
                 animateSuccess = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     animateSuccess = false
+                }
+
+                if !showContinueButton {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        startNextLevel()
+                    }
                 }
             }
         } else {
