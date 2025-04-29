@@ -125,27 +125,6 @@ struct HighscoreButton: ButtonStyle {
     }
 }
 
-struct DifficultyButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            Image(systemName: "trophy")
-            .frame(width: 30, height: 30)
-            .padding(10)
-            .background(Color.gold)
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            .shadow(color: .gold, radius: 5, y: 5)
-            .rotation3DEffect(
-                Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.white)
-            )
-    }
-}
-
 struct punkteShopButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -262,6 +241,26 @@ struct screenRotateSettingButton: ButtonStyle {
             .shadow(color: .green, radius: 5, y: 5)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
+    }
+}
+
+struct DifficultyButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "chart.line.uptrend.xyaxis")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .shadow(color: .green, radius: 5, y: 5)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(style: StrokeStyle(lineWidth: 3))

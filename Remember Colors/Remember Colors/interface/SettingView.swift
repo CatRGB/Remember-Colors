@@ -61,6 +61,16 @@ struct SettingView: View {
                     }
                     .buttonStyle(screenRotateSettingButton())
                     
+                    Button("SCHWIERIGKEIT") {
+                        
+                    }
+                    .buttonStyle(DifficultyButton())
+                    
+                    Button("?") {
+                        
+                    }
+                    .buttonStyle(screenRotateSettingButton())
+                    
                     Button("CREDITS") {
                         withAnimation(.easeInOut(duration: 0.5)) {
                             startPressed = true

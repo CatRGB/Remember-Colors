@@ -72,11 +72,6 @@ struct StartUI: View {
                         
                         Button("") {
                         }
-                        .buttonStyle(DifficultyButton())
-                        .padding(.leading, 10)
-                        
-                        Button("") {
-                        }
                         .buttonStyle(punkteShopButton())
                         .padding(.leading, 50)
                     }
