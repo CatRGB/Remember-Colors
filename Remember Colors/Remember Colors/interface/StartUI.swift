@@ -10,6 +10,7 @@ import SwiftUI
 struct StartUI: View {
     
     @State private var navigateToContentView = false
+    @State private var navigateToSettingsView = false
     @State private var startPressed = false
     
     var body: some View {
@@ -17,6 +18,11 @@ struct StartUI: View {
             // ContentView anzeigen, wenn navigiert
             if navigateToContentView {
                 ContentView()
+                    .transition(.move(edge: .trailing)) // Übergang für ContentView
+                    .zIndex(1) // Sicherstellen, dass ContentView oben angezeigt wird
+            }
+            if navigateToSettingsView {
+                SettingView()
                     .transition(.move(edge: .trailing)) // Übergang für ContentView
                     .zIndex(1) // Sicherstellen, dass ContentView oben angezeigt wird
             }
@@ -47,6 +53,15 @@ struct StartUI: View {
                     
                     HStack {
                         Button("") {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                startPressed = true
+                            }
+                            // Verzögerung und dann Navigation zu ContentView
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation {
+                                    navigateToSettingsView = true
+                                }
+                            }
                         }
                         .buttonStyle(SettingsButton())
                         

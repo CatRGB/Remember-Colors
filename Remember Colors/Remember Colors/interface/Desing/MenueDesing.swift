@@ -54,6 +54,7 @@ struct GrowingButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(10)
+            .frame(width: 50, height: 50)
             .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(10)
@@ -66,12 +67,18 @@ struct GrowingButton: ButtonStyle {
 struct FlipButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .frame(width: 50, height: 50)
             .padding(10)
             .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(10)
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.gray)
             )
     }
 }
@@ -80,6 +87,7 @@ struct SettingsButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
         Image(systemName: "gear")
+            .frame(width: 30, height: 30)
             .padding(10)
             .background(Color.gray)
             .foregroundColor(.white)
@@ -88,6 +96,11 @@ struct SettingsButton: ButtonStyle {
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
     }
 }
 
@@ -95,6 +108,7 @@ struct HighscoreButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             Image(systemName: "flame")
+            .frame(width: 30, height: 30)
             .padding(10)
             .background(Color.red)
             .foregroundColor(.white)
@@ -102,6 +116,11 @@ struct HighscoreButton: ButtonStyle {
             .shadow(color: .red, radius: 5, y: 5)
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
             )
     }
 }
@@ -110,6 +129,7 @@ struct DifficultyButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             Image(systemName: "trophy")
+            .frame(width: 30, height: 30)
             .padding(10)
             .background(Color.gold)
             .foregroundColor(.white)
@@ -118,6 +138,11 @@ struct DifficultyButton: ButtonStyle {
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
     }
 }
 
@@ -125,6 +150,7 @@ struct punkteShopButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             Image(systemName: "cart")
+            .frame(width: 30, height: 30)
             .padding(10)
             .background(Color.yellow)
             .foregroundColor(.white)
@@ -133,6 +159,11 @@ struct punkteShopButton: ButtonStyle {
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
     }
 }
 
@@ -140,6 +171,7 @@ struct backButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
         Image(systemName: "chevron.left")
+            .frame(width: 50, height: 50)
             .padding(10)
             .background(Color.red)
             .foregroundColor(.white)
@@ -148,6 +180,11 @@ struct backButton: ButtonStyle {
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
     }
 }
 
@@ -155,6 +192,7 @@ struct playToButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
         Image(systemName: "play")
+            .frame(width: 50, height: 50)
             .padding(10)
             .background(Color.green)
             .foregroundColor(.white)
@@ -162,6 +200,92 @@ struct playToButton: ButtonStyle {
             .shadow(color: .green, radius: 5, y: 5)
             .rotation3DEffect(
                 Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
+    }
+}
+
+
+struct titleMusicSettingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "music.quarternote.3")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .shadow(color: .green, radius: 5, y: 5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
+    }
+}
+
+struct soundEffectsSettingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "speaker")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .shadow(color: .green, radius: 5, y: 5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
+    }
+}
+
+struct screenRotateSettingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.page.on.clipboard")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .shadow(color: .green, radius: 5, y: 5)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
+            )
+    }
+}
+
+struct creditsSettingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "person")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .shadow(color: .green, radius: 5, y: 5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.white)
             )
     }
 }
