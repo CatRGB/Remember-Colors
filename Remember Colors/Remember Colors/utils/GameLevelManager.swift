@@ -10,11 +10,11 @@ import SwiftUICore
 
 class GameLevelManager: ObservableObject {
     @Published var colors: [Color] = [.red, .green, .blue, .yellow]
-    @Published var availableColors: [Color] = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal]
+    @Published var availableColors: [Color] = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal, .brown, .gold, .gray]
     @Published var colorButtonStates: [Bool] = [false, false ,false, false]
     @Published var newlyAddedColorIndex: Int? = nil // Speichert welche Buttons / Farben da zu gekommen sind.
     
-    let levelThresholdsForNewColor = [3, 4, 5, 9, 12]
+    let levelThresholdsForNewColor = [3, 5, 7, 10, 13, 15, 17, 20, 25, 30]
     
     var numberofColors: Int {
         colors.count
@@ -30,7 +30,7 @@ class GameLevelManager: ObservableObject {
     
     func resetColors() {
         colors = [.red, .green, .blue, .yellow]
-        availableColors = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal]
+        availableColors = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal, .brown, .gold, .gray]
         colorButtonStates = Array(repeating: false, count: colors.count)
         
     }

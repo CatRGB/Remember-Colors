@@ -12,8 +12,9 @@ import SwiftData
 struct SettingView: View {
     
     @State private var atmungszeit = false
-    @State private var soundeffekte = false
-    @State private var bildschiermrotation = false
+    @State private var isTitleMusicLocked = false
+    @State private var isSoundeffekteLocked = false
+    
     
     // Navigation
     @State private var startPressed = false
@@ -47,29 +48,20 @@ struct SettingView: View {
                 
                 LazyVGrid(columns: columns, spacing: 30) {
                     Button("TITLE MUSIK") {
-                        
+                        isTitleMusicLocked.toggle()
                     }
-                    .buttonStyle(titleMusicSettingButton())
+                    .buttonStyle(titleMusicSettingButton(isTitleMusicLocked: isTitleMusicLocked))
                     
                     Button("SOUND EFFECTS") {
-                        
+                        isSoundeffekteLocked.toggle()
                     }
-                    .buttonStyle(soundEffectsSettingButton())
+                    .buttonStyle(soundEffectsSettingButton(isSoundeffekteLocked: isSoundeffekteLocked))
                     
-                    Button("ROTATION") {
-                        
-                    }
-                    .buttonStyle(screenRotateSettingButton())
                     
                     Button("SCHWIERIGKEIT") {
                         
                     }
                     .buttonStyle(DifficultyButton())
-                    
-                    Button("?") {
-                        
-                    }
-                    .buttonStyle(screenRotateSettingButton())
                     
                     Button("CREDITS") {
                         withAnimation(.easeInOut(duration: 0.5)) {
