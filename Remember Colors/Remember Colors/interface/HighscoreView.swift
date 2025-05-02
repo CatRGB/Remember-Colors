@@ -28,9 +28,42 @@ struct HighscoreView: View {
                     .padding(.bottom, 10)
                 
                 VStack(spacing: 20) {
-                    List(0..<30) {
+                    
+                    List(0..<101) {
                         Text("Heigscores: \($0)")
+                            .padding()
+                            .background(
+                                
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 0.5)
+                                    .stroke(
+                                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 6
+                                )
+                            )
+                            .lineLimit(1)
+                            .cornerRadius(10)
+                            .shadow(radius: 2)
+                            .padding(.vertical, 0.5)
+                            .modifier(HighscoreListStyle())
                     }
+                    .scrollContentBackground(.hidden)
+                    
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(
+                                LinearGradient(colors: [.red, .green, .blue, .yellow],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 6
+                        )
+                    )
+                    .padding()
                     
                     Button("") {
                         withAnimation(.easeInOut(duration: 0.5)) {

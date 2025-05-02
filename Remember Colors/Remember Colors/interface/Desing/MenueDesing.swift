@@ -60,6 +60,21 @@ struct TitleStyle: ViewModifier {
     }
 }
 
+struct HighscoreListStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 25, weight: .bold))
+            .foregroundStyle(
+                LinearGradient(
+                    gradient: Gradient(colors: [.red, .green, .blue, .yellow]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            //.shadow(color: .black, radius: 10, x: 5, y: 5)
+    }
+}
+
 struct WaveEfect: ButtonStyle {
     @State private var waveEffect: CGFloat = 0
     
@@ -131,8 +146,14 @@ struct SettingsButton: ButtonStyle {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
+                .foregroundColor(.gray)
             )
     }
 }
@@ -151,8 +172,13 @@ struct HighscoreButton: ButtonStyle {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -171,8 +197,13 @@ struct punkteShopButton: ButtonStyle {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -191,8 +222,13 @@ struct backButton: ButtonStyle {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -211,8 +247,13 @@ struct playToButton: ButtonStyle {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -232,8 +273,13 @@ struct titleMusicSettingButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -252,8 +298,13 @@ struct soundEffectsSettingButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -271,8 +322,13 @@ struct rateSettingButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -290,8 +346,13 @@ struct creditsSettingButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -313,8 +374,13 @@ struct LightnessButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -335,8 +401,13 @@ struct NormalButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }
@@ -357,8 +428,13 @@ struct HeavyButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
             )
     }
 }

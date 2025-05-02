@@ -46,7 +46,7 @@ struct SettingView: View {
                 Text("Settings")
                     .modifier(TitleStyle())
                     .padding(.top, 60)
-                    .padding(.bottom, 80)
+                    .padding(.bottom, 60)
                 
                 
                 LazyVGrid(columns: columns, spacing: 30) {
@@ -102,7 +102,7 @@ struct SettingView: View {
                     }
                     .buttonStyle(HeavyButton(difficulty: .heavy, isLocked: selectedDifficulty != .heavy))
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
                 
                 
                 
@@ -119,7 +119,7 @@ struct SettingView: View {
                             }
                         }
                     }
-                    .padding(.top, 50)
+                    .padding(.top, 30)
                     .buttonStyle(backButton())
                 }
                 
