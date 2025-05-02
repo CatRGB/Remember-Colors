@@ -7,8 +7,42 @@
 
 import SwiftUI
 
+enum Difficulty {
+    case light, normal, heavy
+    
+    var color: Color {
+        switch self {
+        case .light:
+            return .bronze
+        case .normal:
+            return .silver
+        case .heavy:
+            return .gold
+        }
+    }
+    
+    var darkColor: Color {
+        switch self {
+        case .light:
+            return .darkBronze
+        case .normal:
+            return .darkSilver
+        case .heavy:
+            return .darkGold
+        }
+    }
+    
+}
+
+
 extension Color {
     static let gold = Color(red: 1.0, green: 0.84, blue: 0.0)
+    static let silver = Color(red: 0.78, green: 0.78, blue: 0.82)
+    static let bronze = Color(red: 0.82, green: 0.52, blue: 0.0)
+    
+    static let darkGold = Color(red: 0.7, green: 0.59, blue: 0.0)
+    static let darkSilver = Color(red: 0.55, green: 0.55, blue: 0.58)
+    static let darkBronze = Color(red: 0.58, green: 0.37, blue: 0.0)
 }
 
 struct TitleStyle: ViewModifier {
@@ -224,11 +258,10 @@ struct soundEffectsSettingButton: ButtonStyle {
     }
 }
 
-
-struct DifficultyButton: ButtonStyle {
+struct rateSettingButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-        Image(systemName: "chart.line.uptrend.xyaxis")
+        Image(systemName: "suit.heart")
             .frame(width: 50, height: 50)
             .padding(10)
             .background(Color.green)
@@ -251,6 +284,73 @@ struct creditsSettingButton: ButtonStyle {
             .frame(width: 50, height: 50)
             .padding(10)
             .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.gray)
+            )
+    }
+}
+
+
+struct LightnessButton: ButtonStyle {
+    var difficulty: Difficulty
+    var isLocked: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "1.lane")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(isLocked ? difficulty.darkColor : difficulty.color)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.gray)
+            )
+    }
+}
+
+struct NormalButton: ButtonStyle {
+    var difficulty: Difficulty
+    var isLocked: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "chart.line.uptrend.xyaxis")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(isLocked ? difficulty.darkColor : difficulty.color)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(style: StrokeStyle(lineWidth: 3))
+                    .foregroundColor(.gray)
+            )
+    }
+}
+
+struct HeavyButton: ButtonStyle {
+    var difficulty: Difficulty
+    var isLocked: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "chart.line.uptrend.xyaxis")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(isLocked ? difficulty.darkColor : difficulty.color)
             .foregroundColor(.white)
             .cornerRadius(10)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)

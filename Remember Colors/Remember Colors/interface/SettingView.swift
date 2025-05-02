@@ -15,6 +15,11 @@ struct SettingView: View {
     @State private var isTitleMusicLocked = false
     @State private var isSoundeffekteLocked = false
     
+    // Schwirgkeit
+    
+    @State private var selectedDifficulty: Difficulty = .light
+
+    
     
     // Navigation
     @State private var startPressed = false
@@ -25,6 +30,7 @@ struct SettingView: View {
             GridItem(.flexible()),
             GridItem(.flexible())
         ]
+
     
     var body: some View {
         ZStack {
@@ -58,10 +64,10 @@ struct SettingView: View {
                     .buttonStyle(soundEffectsSettingButton(isSoundeffekteLocked: isSoundeffekteLocked))
                     
                     
-                    Button("SCHWIERIGKEIT") {
-                        
+                    Button("Bewerten") {
+                        // Soll die Apple App Page
                     }
-                    .buttonStyle(DifficultyButton())
+                    .buttonStyle(rateSettingButton())
                     
                     Button("CREDITS") {
                         withAnimation(.easeInOut(duration: 0.5)) {
@@ -75,8 +81,35 @@ struct SettingView: View {
                         }
                     }
                     .buttonStyle(creditsSettingButton())
-
                 }
+                
+                VStack {
+                    Text("SCHWIRIGKEIT")
+                }
+                .padding(.top, 20)
+                
+                HStack(spacing: 20) {
+                    
+                    Button("") {
+                        selectedDifficulty = .light
+                    }
+                    .buttonStyle(LightnessButton(difficulty: .light, isLocked: selectedDifficulty != .light))
+                    
+                    Button("") {
+                        selectedDifficulty = .normal
+                    }
+                    .buttonStyle(HeavyButton(difficulty: .normal, isLocked: selectedDifficulty != .normal))
+                    
+                    Button("") {
+                        selectedDifficulty = .heavy
+                    }
+                    .buttonStyle(HeavyButton(difficulty: .heavy, isLocked: selectedDifficulty != .heavy))
+                }
+                .padding(.bottom, 20)
+                
+                
+                
+                
                 VStack(spacing: 20) {
                     Button("") {
                         withAnimation(.easeInOut(duration: 0.5)) {

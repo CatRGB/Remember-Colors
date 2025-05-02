@@ -10,7 +10,7 @@ import SwiftUICore
 
 class GameLevelManager: ObservableObject {
     @Published var colors: [Color] = [.red, .green, .blue, .yellow]
-    @Published var availableColors: [Color] = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal, .brown, .gold, .gray]
+    @Published var availableColors: [Color] = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal, .brown, .gold, .gray, .silver, .bronze]
     @Published var colorButtonStates: [Bool] = [false, false ,false, false]
     @Published var newlyAddedColorIndex: Int? = nil // Speichert welche Buttons / Farben da zu gekommen sind.
     
@@ -30,7 +30,7 @@ class GameLevelManager: ObservableObject {
     
     func resetColors() {
         colors = [.red, .green, .blue, .yellow]
-        availableColors = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal, .brown, .gold, .gray]
+        availableColors = [.purple, .orange, .pink, .cyan, .mint, .indigo, .teal, .brown, .gold, .gray, .silver, .bronze]
         colorButtonStates = Array(repeating: false, count: colors.count)
         
     }
