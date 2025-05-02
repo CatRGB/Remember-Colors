@@ -11,6 +11,7 @@ struct StartUI: View {
     
     @State private var navigateToContentView = false
     @State private var navigateToSettingsView = false
+    @State private var navigateToHighscoreView = false
     @State private var startPressed = false
     
     var body: some View {
@@ -25,6 +26,12 @@ struct StartUI: View {
                 SettingView()
                     .transition(.move(edge: .trailing)) // Übergang für ContentView
                     .zIndex(1) // Sicherstellen, dass ContentView oben angezeigt wird
+            }
+            
+            if navigateToHighscoreView {
+                HighscoreView()
+                    .transition(.move(edge: .trailing))
+                    .zIndex(1)
             }
             
             VStack {
@@ -66,6 +73,14 @@ struct StartUI: View {
                         .buttonStyle(SettingsButton())
                         
                         Button("") {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                startPressed = true
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation {
+                                    navigateToHighscoreView = true
+                                }
+                            }
                         }
                         .buttonStyle(HighscoreButton())
                         .padding(.leading, 50)
@@ -75,7 +90,7 @@ struct StartUI: View {
                         .buttonStyle(punkteShopButton())
                         .padding(.leading, 50)
                     }
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 70)
                 }
                 .opacity(startPressed ? 0 : 1) // Buttons und Text blenden aus, wenn Start gedrückt
                 .offset(y: startPressed ? -UIScreen.main.bounds.height : 0) // Gleiten nach oben

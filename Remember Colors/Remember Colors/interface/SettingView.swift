@@ -16,10 +16,7 @@ struct SettingView: View {
     @State private var isSoundeffekteLocked = false
     
     // Schwirgkeit
-    
     @State private var selectedDifficulty: Difficulty = .light
-
-    
     
     // Navigation
     @State private var startPressed = false

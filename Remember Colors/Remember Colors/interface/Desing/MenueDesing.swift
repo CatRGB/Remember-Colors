@@ -180,7 +180,7 @@ struct punkteShopButton: ButtonStyle {
 struct backButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-        Image(systemName: "chevron.left")
+        Image(systemName: "door.left.hand.open")
             .frame(width: 50, height: 50)
             .padding(10)
             .background(Color.red)
@@ -200,7 +200,7 @@ struct backButton: ButtonStyle {
 struct playToButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-        Image(systemName: "play")
+        Image(systemName: "memories")
             .frame(width: 50, height: 50)
             .padding(10)
             .background(Color.green)
@@ -303,7 +303,7 @@ struct LightnessButton: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-        Image(systemName: "1.lane")
+        Image(systemName: "chart.line.uptrend.xyaxis")
             .frame(width: 50, height: 50)
             .padding(10)
             .background(isLocked ? difficulty.darkColor : difficulty.color)
