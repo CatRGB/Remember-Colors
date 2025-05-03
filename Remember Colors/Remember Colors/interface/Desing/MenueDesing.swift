@@ -438,3 +438,27 @@ struct HeavyButton: ButtonStyle {
             )
     }
 }
+
+struct sharedButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        Image(systemName: "square.and.arrow.up")
+            .frame(width: 50, height: 50)
+            .padding(10)
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(
+                        LinearGradient(colors: [.red, .green, .blue, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 6
+                )
+            )
+    }
+}

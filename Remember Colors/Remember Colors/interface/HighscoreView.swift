@@ -64,18 +64,33 @@ struct HighscoreView: View {
                 )
                 .padding(.horizontal)
 
-                Button("") {
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        startPressed = true
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                HStack(spacing: 160) {
+                    Button("") {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            navigateToContentView = true
+                            startPressed = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                navigateToContentView = true
+                            }
                         }
                     }
+                    .buttonStyle(backButton())
+                    .padding(.bottom, 40)
+                    
+                    Button("") {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                
+                            }
+                        }
+                    }
+                    .buttonStyle(sharedButton())
+                    .padding(.bottom, 40)
                 }
-                .buttonStyle(backButton())
-                .padding(.bottom, 40)
             }
             .opacity(startPressed ? 0 : 1)
             .offset(y: startPressed ? -UIScreen.main.bounds.height : 0)
