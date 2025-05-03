@@ -78,7 +78,7 @@ struct HighscoreView: View {
                     .buttonStyle(backButton())
                     .padding(.bottom, 40)
                     
-                    Button("") {
+                    Button("Game Center") {
                         withAnimation(.easeInOut(duration: 0.5)) {
                             
                         }
