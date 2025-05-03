@@ -30,7 +30,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		415200F92DBE7BA200FD4002 /* Exceptions for "Remember Colors" folder in "Remember Colors" target */ = {
+		41D2812E2DC62A1F007E402B /* Exceptions for "Remember Colors" folder in "Remember Colors" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -43,7 +43,7 @@
 		415200D82DBE7B9F00FD4002 /* Remember Colors */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				415200F92DBE7BA200FD4002 /* Exceptions for "Remember Colors" folder in "Remember Colors" target */,
+				41D2812E2DC62A1F007E402B /* Exceptions for "Remember Colors" folder in "Remember Colors" target */,
 			);
 			path = "Remember Colors";
 			sourceTree = "<group>";

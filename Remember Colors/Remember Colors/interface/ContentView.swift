@@ -33,7 +33,8 @@ struct ContentView: View {
     let delayWithoutNewColor: Double = 0.5
     
     @StateObject private var levelManager = GameLevelManager()
-    
+    @ObservedObject private var highscoreManager = HighscoreManager.shared
+
     // Dynamisch Spaltenanzahl
     var gridColumns: [GridItem] {
         let columns = Int(ceil(sqrt(Double(levelManager.colors.count))))
@@ -220,6 +221,8 @@ struct ContentView: View {
         infoText = "Game Over"
         actionButtonText = "Neues Spiel"
         isActionButtonEnabled = true
+        
+        highscoreManager.addHighscore(level: colorSequence.count)
     }
     
     func colorButtonHandler(_ index: Int) {

@@ -21,7 +21,7 @@ struct ColorButton: View {
                 .frame(width: size, height: size)
                 .overlay(
                     Circle()
-                        .stroke(Color.white, lineWidth: isHighlighted ? 4 : 0)
+                        .stroke(Color.white, lineWidth: isHighlighted ? 30 : 0)
                 )
                 .opacity(isHighlighted ? 0.5 : 1.0)
         }

@@ -138,7 +138,7 @@ struct SettingsButton: ButtonStyle {
         Image(systemName: "gear")
             .frame(width: 30, height: 30)
             .padding(10)
-            .background(Color.gray)
+            .background(Color.darkSilver)
             .foregroundColor(.white)
             .cornerRadius(10)
             .rotation3DEffect(
