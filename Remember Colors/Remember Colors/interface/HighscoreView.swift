@@ -12,6 +12,7 @@ struct HighscoreView: View {
     // Navigation
     @State private var startPressed = false
     @State private var navigateToContentView = false
+    @State private var showGC = false
     
     @StateObject private var highscoreManager = HighscoreManager.shared
     
@@ -80,7 +81,7 @@ struct HighscoreView: View {
                     
                     Button("Game Center") {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            
+                            showGC = true
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             withAnimation(.easeInOut(duration: 0.5)) {
@@ -91,6 +92,9 @@ struct HighscoreView: View {
                     .buttonStyle(sharedButton())
                     .padding(.bottom, 40)
                 }
+            }
+            .sheet(isPresented: $showGC) {
+                GameCenterView()
             }
             .opacity(startPressed ? 0 : 1)
             .offset(y: startPressed ? -UIScreen.main.bounds.height : 0)
