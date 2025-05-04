@@ -158,4 +158,34 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
                 .present(vc, animated: true)
         }
     }
+    
+    func reportAchievement(identifier: String, percentComplete: Double) {
+        guard isAuthenticated else { return }
+        
+        let achievement = GKAchievement(identifier: identifier)
+        achievement.percentComplete = percentComplete
+        achievement.showsCompletionBanner = true
+        
+        GKAchievement.report([achievement]) { error in
+            if let error = error {
+                print("❌ Achievement Error: \(error.localizedDescription)")
+            } else {
+                print("✅ Achievement '\(identifier)' gemeldet")
+            }
+        }
+    }
+    
+    func showAchievements() {
+        guard isAuthenticated else { return }
+        
+        
+        let vc = GKGameCenterViewController()
+        vc.viewState = .achievements
+        vc.gameCenterDelegate = self
+        
+        DispatchQueue.main.async {
+            UIApplication.rootViewController?.present(vc, animated: true)
+        }
+    }
+    
 }

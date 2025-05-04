@@ -161,6 +161,33 @@ struct ContentView: View {
         if levelManager.levelThresholdsForNewColor.contains(colorSequence.count) {
             levelManager.addNewColors()
             newColorAdded = true
+            
+            
+            /// Achievement: Farben-Anfänger
+            if colorSequence.count == 1 {
+                gcManager.reportAchievement(identifier: "first_correct_color", percentComplete: 10)
+            }
+            
+            /// Achievement: Farben-Profi
+            if colorSequence.count == 10 {
+                gcManager.reportAchievement(identifier: "ten_correct_colors", percentComplete: 20)
+            }
+            
+            /// Achievement: Konzentrationsmeister
+            if colorSequence.count == 15 {
+                gcManager.reportAchievement(identifier: "no_mistakes_level5", percentComplete: 30)
+            }
+            
+            /// Achievement: Farbmeister
+            if colorSequence.count == 10 {
+                gcManager.reportAchievement(identifier: "level10_reached", percentComplete: 40)
+            }
+            
+            /// Achievment: Farb-Legende
+            if colorSequence.count == 50 {
+                gcManager.reportAchievement(identifier: "highscore_above_50", percentComplete: 100)
+            }
+            
         }
         
         // Die neue Farbe oder das neue Level vorbereiten
@@ -226,6 +253,20 @@ struct ContentView: View {
         highscoreManager.addHighscore(level: finalScore)
         if gcManager.isAuthenticated {
             GameCenterManager.shared.submitScore(finalScore)
+            
+            
+            /// Achievment: Dranbleiber
+            if finalScore >= 5 {
+                gcManager.reportAchievement(identifier: "play_5_games", percentComplete: 20)
+            }
+            
+            /// Achievment: Gedächtnisprofi
+            if finalScore >= 3 {
+                
+            }
+            
+            /// Achievments: Farben-Veteran
+            
         }
     }
     
