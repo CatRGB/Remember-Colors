@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
+import GameKit
 
 struct HighscoreView: View {
     
-    // Navigation
     @State private var startPressed = false
     @State private var navigateToContentView = false
-    @State private var showGC = false
     
-    @StateObject private var highscoreManager = HighscoreManager.shared
+    // Lokaler Manager
+    @StateObject private var localManager = HighscoreManager.shared
+    // Game Center Manager
+    @StateObject private var gcManager = GameCenterManager.shared
     
     var body: some View {
         ZStack {
@@ -23,85 +25,123 @@ struct HighscoreView: View {
                     .transition(.move(edge: .trailing))
                     .zIndex(1)
             }
-
-            VStack {
-                Text("Highscore")
+            
+            VStack(spacing: 20) {
+                Text("Highscores")
                     .modifier(TitleStyle())
                     .padding(.top, 60)
-                    .padding(.bottom, 10)
-
-                List {
-                    ForEach(highscoreManager.highscore) { score in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Level: \(score.level)")
-                                .font(.headline)
-                            Text("Am: \(score.date.formatted(date: .abbreviated, time: .shortened))")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
+                
+                TabView {
+                    VStack {
+                        List {
+                            ForEach(localManager.highscore) { hs in
+                                Text("Level \(hs.level) – \(hs.date.formatted(date: .abbreviated, time: .shortened))")
+                                    .font(.headline)
+                                    .foregroundStyle(.gray)
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(
+                                        LinearGradient(
+                                            colors: [.red, .green, .blue, .yellow],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing),
+                                            lineWidth: 3)
+                            )
                         }
-                        .padding()
-                        .background(
+                        .scrollContentBackground(.hidden)
+                        .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(
                                     LinearGradient(
                                         colors: [.red, .green, .blue, .yellow],
                                         startPoint: .topLeading,
-                                        endPoint: .bottomTrailing),
-                                    lineWidth: 3)
-                        )
+                                        endPoint: .bottomTrailing
+                                        ),
+                                        lineWidth: 6
+                                )
+                            )
+                        .padding(.horizontal)
+                    }
+                    
+                    .tabItem {
+                        Label("Lokal", systemImage: "person.circle")
+                    }
+                    
+                    // Online Highscores
+                    VStack {
+                        List {
+                            if gcManager.topScores.isEmpty {
+                                Text("Keine Daten")
+                                    .foregroundColor(.gray)
+                            } else {
+                                ForEach(gcManager.topScores, id: \.player) { score in
+                                    HStack {
+                                        Text("\(score.player.displayName)  Hisghscore:")
+                                            .font(.headline)
+                                            .foregroundStyle(.gray)
+                                        Spacer()
+                                        Text("\(score.value)")
+                                            .bold()
+                                    }
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(
+                                            LinearGradient(
+                                                colors: [.red, .green, .blue, .yellow],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing),
+                                                lineWidth: 3)
+                                )
+                            }
+                        }
+                        .scrollContentBackground(.hidden)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [.red, .green, .blue, .yellow],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                        ),
+                                        lineWidth: 6
+                                )
+                            )
+                        .padding(.horizontal)
+                    }
+                    .tabItem {
+                        Label("Online", systemImage: "square.and.arrow.up")
                     }
                 }
-                .scrollContentBackground(.hidden)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(
-                            LinearGradient(
-                                colors: [.red, .green, .blue, .yellow],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 6
-                        )
-                )
-                .padding(.horizontal)
-
-                HStack(spacing: 160) {
+                
+                HStack(spacing: 40) {
                     Button("") {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            startPressed = true
-                        }
+                        withAnimation { startPressed = true }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation(.easeInOut(duration: 0.5)) {
-                                navigateToContentView = true
-                            }
+                            withAnimation { navigateToContentView = true }
                         }
                     }
                     .buttonStyle(backButton())
-                    .padding(.bottom, 40)
                     
                     Button("Game Center") {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            showGC = true
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation(.easeInOut(duration: 0.5)) {
-                                
-                            }
-                        }
+                        gcManager.showLeaderboard()
                     }
                     .buttonStyle(sharedButton())
-                    .padding(.bottom, 40)
                 }
-            }
-            .sheet(isPresented: $showGC) {
-                GameCenterView()
+                .padding(.bottom, 50)
             }
             .opacity(startPressed ? 0 : 1)
             .offset(y: startPressed ? -UIScreen.main.bounds.height : 0)
-            .animation(.easeInOut(duration: 0.5), value: startPressed)
+            .animation(.easeInOut, value: startPressed)
         }
-        .zIndex(startPressed ? 0 : 1)
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            // optional: beim Öffnen direkt laden
+            gcManager.fetchTopScores(limit: 10)
+        }
     }
 }
 

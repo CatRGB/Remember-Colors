@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
     
@@ -222,7 +221,9 @@ struct ContentView: View {
         actionButtonText = "Neues Spiel"
         isActionButtonEnabled = true
         
-        highscoreManager.addHighscore(level: colorSequence.count)
+        let finalScore = colorSequence.count
+        highscoreManager.addHighscore(level: finalScore)
+        GameCenterManager.shared.submitScore(finalScore)
     }
     
     func colorButtonHandler(_ index: Int) {

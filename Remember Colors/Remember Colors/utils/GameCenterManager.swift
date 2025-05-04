@@ -10,7 +10,7 @@ import GameKit
 import UIKit
 
 private extension UIApplication {
-    /// Liefert den aktuellen Key-Window-RootViewController in SwiftUI-Apps
+    /// Hilfs-Extension, um den aktuellen Key-Window RootViewController in SwiftUI-Apps zu finden
     static var rootViewController: UIViewController? {
         shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
@@ -20,101 +20,130 @@ private extension UIApplication {
     }
 }
 
+/// Singleton, das Game Center Auth, Score-Submit und Laden von Scores kapselt
 class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDelegate {
     
     static let shared = GameCenterManager()
+    
+    /// Authentifizierungs-Status
     @Published var isAuthenticated = false
+    
+    /// Geladene Top-Scores
+    @Published var topScores: [GKScore] = []
     
     private override init() {
         super.init()
         authenticatePlayer()
     }
     
-    /// Authentifiziert den lokalen Spieler bei Game Center
+    /// Meldet den Spieler bei Game Center an
     func authenticatePlayer() {
         let local = GKLocalPlayer.local
         local.authenticateHandler = { [weak self] vc, error in
             if let loginVC = vc {
-                // Login-Screen anzeigen
                 DispatchQueue.main.async {
                     UIApplication.rootViewController?
                         .present(loginVC, animated: true)
                 }
             } else if local.isAuthenticated {
-                // erfolgreich angemeldet
                 self?.isAuthenticated = true
-                print("✅ GC: Spieler authentifiziert")
             } else {
-                // nicht angemeldet oder Fehler
                 self?.isAuthenticated = false
                 print("❌ GC Auth-Fehler:", error?.localizedDescription ?? "Unbekannt")
             }
         }
     }
     
-    /// Meldet den besten Level an Game Center
+    /// Sendet den besten Level an dein GC-Leaderboard
     func submitScore(_ level: Int) {
-        guard isAuthenticated else {
-            print("⚠️ GC nicht authentifiziert – Score nicht gesendet")
-            return
-        }
+        guard isAuthenticated else { return }
         
         if #available(iOS 14.0, *) {
-            // Neuer iOS-14+ API-Aufruf: direkt mehrere Leaderboards supporten
             GKLeaderboard.submitScore(
-                level,                // dein Integer-Score
-                context: 0,           // frei wählbares Meta-Feld (hier 0)
+                level,
+                context: 0,
                 player: GKLocalPlayer.local,
                 leaderboardIDs: ["Remember_Highscore_Online"]
             ) { error in
                 if let err = error {
-                    print("❌ Fehler beim Submit (iOS14+):", err.localizedDescription)
-                } else {
-                    print("✅ Score \(level) erfolgreich gesendet (iOS14+)")
+                    print("❌ Submit (iOS14+):", err.localizedDescription)
                 }
             }
         } else {
-            // Fallback für iOS <14
-            let gcScore = GKScore(leaderboardIdentifier: "Remember_Highscore_Online")
-            gcScore.value = Int64(level)
-            GKScore.report([gcScore]) { error in
+            let score = GKScore(leaderboardIdentifier: "Remember_Highscore_Online")
+            score.value = Int64(level)
+            GKScore.report([score]) { error in
                 if let err = error {
-                    print("❌ Fehler beim Submit (Legacy):", err.localizedDescription)
-                } else {
-                    print("✅ Score \(level) erfolgreich gesendet (Legacy)")
+                    print("❌ Submit (Legacy):", err.localizedDescription)
                 }
             }
         }
     }
     
-    /// Delegate-Callback: schließt den Game Center Controller
+    /// Lädt die Top-Scores aus dem Game-Center-Leaderboard
+    func fetchTopScores(limit: Int = 10) {
+        let leaderboardID = "Remember_Highscore_Online"
+
+        if #available(iOS 14.0, *) {
+            // iOS 14+: Lade zuerst das Leaderboard-Objekt
+            GKLeaderboard.loadLeaderboards(IDs: [leaderboardID]) { leaderboards, error in
+                guard let board = leaderboards?.first, error == nil else {
+                    print("❌ Leaderboard-Load failed:", error?.localizedDescription ?? "Unknown")
+                    return
+                }
+                // Gib an, dass wir die globale Bestenliste über alle Zeiten wollen
+                board.playerScope = GKLeaderboard.PlayerScope.global
+                board.timeScope   = GKLeaderboard.TimeScope.allTime
+                // Bereich ist ein NSRange, nicht 1...limit
+                board.range       = NSRange(location: 1, length: limit)
+
+                // Lade die Scores
+                board.loadScores { scores, error in
+                    DispatchQueue.main.async {
+                        self.topScores = scores ?? []
+                    }
+                }
+            }
+        } else {
+            // Fallback für iOS < 14: Verwende den Default-Initializer statt init(players:)
+            let board = GKLeaderboard()
+            board.identifier  = leaderboardID
+            board.playerScope = GKLeaderboard.PlayerScope.global
+            board.timeScope   = GKLeaderboard.TimeScope.allTime
+            board.range       = NSRange(location: 1, length: limit)
+
+            board.loadScores { scores, error in
+                DispatchQueue.main.async {
+                    self.topScores = scores ?? []
+                }
+            }
+        }
+    }
+
+    
+    /// Delegate-Methode: schließt den GC-Controller
     func gameCenterViewControllerDidFinish(_ controller: GKGameCenterViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    /// Zeigt das Game Center Leaderboard an
+    /// Zeigt das native GC-Leaderboard-UI
     func showLeaderboard() {
         guard isAuthenticated else { return }
-        
-        // iOS-14+ Initializer, ersetzt viewState/leaderboardIdentifier
-        let gcVC: GKGameCenterViewController
+        let vc: GKGameCenterViewController
         if #available(iOS 14.0, *) {
-            gcVC = GKGameCenterViewController(
+            vc = GKGameCenterViewController(
                 leaderboardID: "Remember_Highscore_Online",
                 playerScope: .global,
                 timeScope: .allTime
             )
         } else {
-            // Fallback auf alte API
-            gcVC = GKGameCenterViewController(state: .leaderboards)
-            gcVC.leaderboardIdentifier = "Remember_Highscore_Online"
+            vc = GKGameCenterViewController(state: .leaderboards)
+            vc.leaderboardIdentifier = "Remember_Highscore_Online"
         }
-        
-        gcVC.gameCenterDelegate = self
+        vc.gameCenterDelegate = self
         DispatchQueue.main.async {
             UIApplication.rootViewController?
-                .present(gcVC, animated: true)
+                .present(vc, animated: true)
         }
     }
 }
-
