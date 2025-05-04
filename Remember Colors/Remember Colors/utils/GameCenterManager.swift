@@ -33,23 +33,35 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
     
     private override init() {
         super.init()
-        // NICHT hier: authenticatePlayer()
-        //authenticatePlayer()
+        authenticatePlayer()
     }
     
     /// Aufruf nur wenn der Nutzer Login will
-    func authenticatePlayer() {
+    func authenticatePlayer(force: Bool = false) {
         let local = GKLocalPlayer.local
+
+        // Falls der Spieler bereits authentifiziert ist, abbrechen – außer es ist "force"
+        guard force || !local.isAuthenticated else {
+            self.isAuthenticated = true
+            return
+        }
+
         local.authenticateHandler = { [weak self] vc, error in
             if let loginVC = vc {
                 DispatchQueue.main.async {
-                    UIApplication.rootViewController?
-                        .present(loginVC, animated: true)
+                    UIApplication.rootViewController?.present(loginVC, animated: true)
                 }
             } else if local.isAuthenticated {
-                self?.isAuthenticated = true
+                DispatchQueue.main.async {
+                    self?.isAuthenticated = true
+                }
             } else {
-                self?.isAuthenticated = false
+                DispatchQueue.main.async {
+                    self?.isAuthenticated = false
+                }
+                if let error = error {
+                    print("❌ Game Center Auth error:", error.localizedDescription)
+                }
             }
         }
     }

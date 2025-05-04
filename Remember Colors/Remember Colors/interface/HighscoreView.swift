@@ -38,7 +38,7 @@ struct HighscoreView: View {
                     
                     // Online Scores
                     onlineHighscores
-                        .tabItem { Label("Online", systemImage: "square.and.arrow.up") }
+                        .tabItem { Label("Online", systemImage: "trophy") }
                 }
                 
                 actionButtons
@@ -149,15 +149,6 @@ struct HighscoreView: View {
                 }
             }
             .buttonStyle(backButton())
-            
-            Button("Game Center") {
-                if !gcManager.isAuthenticated {
-                    gcManager.authenticatePlayer()
-                } else {
-                    gcManager.showLeaderboard()
-                }
-            }
-            .buttonStyle(sharedButton())
         }
     }
 }

@@ -183,10 +183,10 @@ struct SettingsButton: ButtonStyle {
 struct HighscoreButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            Image(systemName: "flame")
+            Image(systemName: "trophy")
             .frame(width: 30, height: 30)
             .padding(10)
-            .background(Color.red)
+            .background(Color.gold)
             .foregroundColor(.white)
             .cornerRadius(10)
             .rotation3DEffect(
@@ -211,7 +211,7 @@ struct punkteShopButton: ButtonStyle {
             Image(systemName: "cart")
             .frame(width: 30, height: 30)
             .padding(10)
-            .background(Color.yellow)
+            .background(Color.bronze)
             .foregroundColor(.white)
             .cornerRadius(10)
             .rotation3DEffect(
@@ -280,7 +280,7 @@ struct playToButton: ButtonStyle {
     }
 }
 
-
+// MARK: Settings View
 struct titleMusicSettingButton: ButtonStyle {
     var isTitleMusicLocked = false
     func makeBody(configuration: Configuration) -> some View {
@@ -407,6 +407,7 @@ struct LightnessButton: ButtonStyle {
     }
 }
 
+// MARK: Schwirigkeit Settings
 struct NormalButton: ButtonStyle {
     var difficulty: Difficulty
     var isLocked: Bool
@@ -461,13 +462,13 @@ struct HeavyButton: ButtonStyle {
     }
 }
 
-struct sharedButton: ButtonStyle {
+struct GameCenterButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-        Image(systemName: "square.and.arrow.up")
+        Image(systemName: "rosette")
             .frame(width: 50, height: 50)
             .padding(10)
-            .background(Color.blue)
+            .background(Color.gold)
             .foregroundColor(.white)
             .cornerRadius(10)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)

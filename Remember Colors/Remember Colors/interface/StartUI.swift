@@ -61,16 +61,6 @@ struct StartUI: View {
                     .buttonStyle(WaveEfect())
                     .padding(.bottom, 200)
                     
-                    // 2) Game Center Login-Button, nur wenn noch nicht angemeldet
-                    if !gcManager.isAuthenticated {
-                        Button("Login to Game Center") {
-                            gcManager.authenticatePlayer()
-                        }
-                        .modifier(ContinuousBounce())
-                        .padding(.bottom, 30)
-                        
-                    }
-                    
                     HStack {
                         Button("") {
                             withAnimation(.easeInOut(duration: 0.5)) {
