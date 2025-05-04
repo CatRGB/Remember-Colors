@@ -19,92 +19,98 @@ struct StartUI: View {
     
     var body: some View {
         ZStack {
-            if !gcManager.isAuthenticated {
-               
-            } else {
-                // ContentView anzeigen, wenn navigiert
-                if navigateToContentView {
-                    ContentView()
-                        .transition(.move(edge: .trailing)) // Übergang für ContentView
-                        .zIndex(1) // Sicherstellen, dass ContentView oben angezeigt wird
-                }
-                if navigateToSettingsView {
-                    SettingView()
-                        .transition(.move(edge: .trailing)) // Übergang für ContentView
-                        .zIndex(1) // Sicherstellen, dass ContentView oben angezeigt wird
-                }
+            // ContentView anzeigen, wenn navigiert
+            if navigateToContentView {
+                ContentView()
+                    .transition(.move(edge: .trailing)) // Übergang für ContentView
+                    .zIndex(1) // Sicherstellen, dass ContentView oben angezeigt wird
+            }
+            if navigateToSettingsView {
+                SettingView()
+                    .transition(.move(edge: .trailing)) // Übergang für ContentView
+                    .zIndex(1) // Sicherstellen, dass ContentView oben angezeigt wird
+            }
+            
+            if navigateToHighscoreView {
+                HighscoreView()
+                    .transition(.move(edge: .trailing))
+                    .zIndex(1)
+            }
+            
+            VStack {
+                Text("Remember Colors")
+                    .modifier(TitleStyle())
+                    .opacity(startPressed ? 0 : 1) // Text blendet aus, wenn Start gedrückt
+                    .padding(.top, 60)
                 
-                if navigateToHighscoreView {
-                    HighscoreView()
-                        .transition(.move(edge: .trailing))
-                        .zIndex(1)
-                }
+                Spacer()
                 
+                // Buttons Bereich
                 VStack {
-                    Text("Remember Colors")
-                        .modifier(TitleStyle())
-                        .opacity(startPressed ? 0 : 1) // Text blendet aus, wenn Start gedrückt
-                        .padding(.top, 60)
+                    Button("- Start -") {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            startPressed = true
+                        }
+                        // Verzögerung und dann Navigation zu ContentView
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation {
+                                navigateToContentView = true
+                            }
+                        }
+                    }
+                    .buttonStyle(WaveEfect())
+                    .padding(.bottom, 200)
                     
-                    Spacer()
+                    // 2) Game Center Login-Button, nur wenn noch nicht angemeldet
+                    if !gcManager.isAuthenticated {
+                        Button("Login to Game Center") {
+                            gcManager.authenticatePlayer()
+                        }
+                        .buttonStyle(WaveEfect())
+                        .padding(.bottom, 20)
+                        
+                    }
                     
-                    // Buttons Bereich
-                    VStack {
-                        Button("- Start -") {
+                    HStack {
+                        Button("") {
                             withAnimation(.easeInOut(duration: 0.5)) {
                                 startPressed = true
                             }
                             // Verzögerung und dann Navigation zu ContentView
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 withAnimation {
-                                    navigateToContentView = true
+                                    navigateToSettingsView = true
                                 }
                             }
                         }
-                        .buttonStyle(WaveEfect())
-                        .padding(.bottom, 200)
+                        .buttonStyle(SettingsButton())
                         
-                        HStack {
-                            Button("") {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    startPressed = true
-                                }
-                                // Verzögerung und dann Navigation zu ContentView
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    withAnimation {
-                                        navigateToSettingsView = true
-                                    }
+                        Button("") {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                startPressed = true
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation {
+                                    navigateToHighscoreView = true
                                 }
                             }
-                            .buttonStyle(SettingsButton())
-                            
-                            Button("") {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    startPressed = true
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    withAnimation {
-                                        navigateToHighscoreView = true
-                                    }
-                                }
-                            }
-                            .buttonStyle(HighscoreButton())
-                            .padding(.leading, 50)
-                            
-                            Button("") {
-                            }
-                            .buttonStyle(punkteShopButton())
-                            .padding(.leading, 50)
                         }
-                        .padding(.bottom, 70)
+                        .buttonStyle(HighscoreButton())
+                        .padding(.leading, 50)
+                        
+                        Button("") {
+                        }
+                        .buttonStyle(punkteShopButton())
+                        .padding(.leading, 50)
                     }
-                    .opacity(startPressed ? 0 : 1) // Buttons und Text blenden aus, wenn Start gedrückt
-                    .offset(y: startPressed ? -UIScreen.main.bounds.height : 0) // Gleiten nach oben
-                    .animation(.easeInOut(duration: 0.5), value: startPressed)
+                    .padding(.bottom, 70)
                 }
-                .zIndex(startPressed ? 0 : 1) // UI nach außen gleiten lassen
-                .edgesIgnoringSafeArea(.all)
+                .opacity(startPressed ? 0 : 1) // Buttons und Text blenden aus, wenn Start gedrückt
+                .offset(y: startPressed ? -UIScreen.main.bounds.height : 0) // Gleiten nach oben
+                .animation(.easeInOut(duration: 0.5), value: startPressed)
             }
+            .zIndex(startPressed ? 0 : 1) // UI nach außen gleiten lassen
+            .edgesIgnoringSafeArea(.all)
         }
     }
 }

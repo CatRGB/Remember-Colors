@@ -151,7 +151,9 @@ struct HighscoreView: View {
             .buttonStyle(backButton())
             
             Button("Game Center") {
-                gcManager.showLeaderboard()
+                if !gcManager.isAuthenticated {
+                    gcManager.authenticatePlayer()
+                }
             }
             .buttonStyle(sharedButton())
         }

@@ -33,6 +33,7 @@ struct ContentView: View {
     
     @StateObject private var levelManager = GameLevelManager()
     @ObservedObject private var highscoreManager = HighscoreManager.shared
+    @ObservedObject private var gcManager = GameCenterManager.shared
 
     // Dynamisch Spaltenanzahl
     var gridColumns: [GridItem] {
@@ -223,7 +224,9 @@ struct ContentView: View {
         
         let finalScore = colorSequence.count
         highscoreManager.addHighscore(level: finalScore)
-        GameCenterManager.shared.submitScore(finalScore)
+        if gcManager.isAuthenticated {
+            GameCenterManager.shared.submitScore(finalScore)
+        }
     }
     
     func colorButtonHandler(_ index: Int) {

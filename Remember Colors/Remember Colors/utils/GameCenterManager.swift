@@ -33,10 +33,11 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
     
     private override init() {
         super.init()
-        authenticatePlayer()
+        // NICHT hier: authenticatePlayer()
+        //authenticatePlayer()
     }
     
-    /// Meldet den Spieler bei Game Center an
+    /// Aufruf nur wenn der Nutzer Login will
     func authenticatePlayer() {
         let local = GKLocalPlayer.local
         local.authenticateHandler = { [weak self] vc, error in
@@ -49,7 +50,6 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
                 self?.isAuthenticated = true
             } else {
                 self?.isAuthenticated = false
-                print("❌ GC Auth-Fehler:", error?.localizedDescription ?? "Unbekannt")
             }
         }
     }
