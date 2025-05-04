@@ -99,6 +99,47 @@ struct WaveEfect: ButtonStyle {
     }
 }
 
+struct ContinuousBounce: ViewModifier {
+    @State private var animate = false
+    
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(animate ? 1.3 : 1.0)
+            .foregroundStyle(
+                LinearGradient(
+                    gradient: Gradient(colors: [.red, .green, .blue, .yellow]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .animation(
+                .interpolatingSpring(stiffness: 200, damping: 10)
+                    .repeatForever(autoreverses: true),
+                value: animate
+            )
+            .onAppear {
+                animate = true
+            }
+    }
+}
+
+struct ContinuousJolt: ViewModifier {
+    @State private var animate = false
+    
+    func body(content: Content) -> some View {
+        content
+            .offset(x: animate ? 15 : 0)
+            .animation(
+                .interpolatingSpring(stiffness: 300, damping: 5)
+                    .repeatForever(autoreverses: true),
+                value: animate
+            )
+            .onAppear {
+                animate = true
+            }
+    }
+}
+
 struct GrowingButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -110,25 +151,6 @@ struct GrowingButton: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
             .shadow(color: .blue, radius: 5, y: 5)
-    }
-}
-
-struct FlipButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(width: 50, height: 50)
-            .padding(10)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            .rotation3DEffect(
-                Angle(degrees: configuration.isPressed ? 180 : 0), axis: (x: 0, y: 1, z: 0)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 3))
-                    .foregroundColor(.gray)
-            )
     }
 }
 

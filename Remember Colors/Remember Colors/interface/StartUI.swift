@@ -66,8 +66,8 @@ struct StartUI: View {
                         Button("Login to Game Center") {
                             gcManager.authenticatePlayer()
                         }
-                        .buttonStyle(WaveEfect())
-                        .padding(.bottom, 20)
+                        .modifier(ContinuousBounce())
+                        .padding(.bottom, 30)
                         
                     }
                     
