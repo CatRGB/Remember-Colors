@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GameKit
 
 struct ContentView: View {
     
@@ -161,33 +162,32 @@ struct ContentView: View {
         if levelManager.levelThresholdsForNewColor.contains(colorSequence.count) {
             levelManager.addNewColors()
             newColorAdded = true
-            
-            
-            /// Achievement: Farben-Anfänger
+
+                
+            /// 🎯 Achievement: Farben-Anfänger
             if colorSequence.count == 1 {
-                gcManager.reportAchievement(identifier: "first_correct_color", percentComplete: 10)
+                gcManager.reportAchievementOnce(identifier: "first_correct_color", percentComplete: 100)
             }
-            
-            /// Achievement: Farben-Profi
+                
+            /// 🎯 Achievment: Gedächtnisprofi
+            if colorSequence.count >= 3 {
+                gcManager.reportAchievementOnce(identifier: "perfect_3_rounds", percentComplete: 100)
+            }
+                
+            /// 🎯 Achievement: Farben-Profi
+            if colorSequence.count >= 10 {
+               gcManager.reportAchievementOnce(identifier: "ten_correct_colors", percentComplete: 100)
+            }
+                
+            /// 🎯 Achievement: Konzentrationsmeister
+            if colorSequence.count >= 5 {
+               gcManager.reportAchievementOnce(identifier: "no_mistakes_level5", percentComplete: 100)
+            }
+                
+            /// 🎯 Achievement: Farbmeister
             if colorSequence.count == 10 {
-                gcManager.reportAchievement(identifier: "ten_correct_colors", percentComplete: 20)
+                gcManager.reportAchievementOnce(identifier: "level10_reached", percentComplete: 100)
             }
-            
-            /// Achievement: Konzentrationsmeister
-            if colorSequence.count == 15 {
-                gcManager.reportAchievement(identifier: "no_mistakes_level5", percentComplete: 30)
-            }
-            
-            /// Achievement: Farbmeister
-            if colorSequence.count == 10 {
-                gcManager.reportAchievement(identifier: "level10_reached", percentComplete: 40)
-            }
-            
-            /// Achievment: Farb-Legende
-            if colorSequence.count == 50 {
-                gcManager.reportAchievement(identifier: "highscore_above_50", percentComplete: 100)
-            }
-            
         }
         
         // Die neue Farbe oder das neue Level vorbereiten
@@ -251,24 +251,30 @@ struct ContentView: View {
         
         let finalScore = colorSequence.count
         highscoreManager.addHighscore(level: finalScore)
+        
+        let gamePlayedCount = UserDefaults.standard.integer(forKey: "gamePlayedCount") + 1
+        UserDefaults.standard.set(gamePlayedCount, forKey: "gamePlayedCount") // ✅ speichern zuerst
+
+        let progress: Double = Double(gamePlayedCount) / 100.0 * 100.0
+        
         if gcManager.isAuthenticated {
             GameCenterManager.shared.submitScore(finalScore)
             
-            
-            /// Achievment: Dranbleiber
-            if finalScore >= 5 {
-                gcManager.reportAchievement(identifier: "play_5_games", percentComplete: 20)
+            /// 🎯 Achievement: Farb-Legende
+            if finalScore >= 50 {
+                gcManager.reportAchievementOnce(identifier: "highscore_above_50", percentComplete: 100)
             }
             
-            /// Achievment: Gedächtnisprofi
-            if finalScore >= 3 {
-                
+            /// 🎯 Achievement: Dranbleiber – 5 Spiele gespielt
+            if gamePlayedCount >= 5 {
+                gcManager.reportAchievementOnce(identifier: "play_5_games", percentComplete: 100)
             }
             
-            /// Achievments: Farben-Veteran
-            
+            /// 🎯 Achievement: Farben-Veteran – Fortschritt (immer melden, nicht nur ab 100)
+            gcManager.reportAchievement(identifier: "played_100_games", percentComplete: min(progress, 100.0))
         }
     }
+
     
     func colorButtonHandler(_ index: Int) {
         guard !colorsToTap.isEmpty else { return }
