@@ -30,6 +30,7 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
     
     /// Geladene Top-Scores
     @Published var topScores: [GKScore] = []
+    @Published var achievmets: [GKAchievement] = []
     
     private override init() {
         super.init()
@@ -197,4 +198,15 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
         }
     }
     
+    func loadAchievements() {
+        GKAchievement.loadAchievements { [weak self ] achievements, error in
+            if let achievements = achievements {
+                DispatchQueue.main.async {
+                    self?.achievmets = achievements
+                }
+            } else if let error = error {
+                print("❌ Fehler beim Laden der Achievements: \(error.localizedDescription)")
+            }
+        }
+    }
 }

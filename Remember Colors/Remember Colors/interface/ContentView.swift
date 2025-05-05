@@ -185,7 +185,7 @@ struct ContentView: View {
             }
                 
             /// 🎯 Achievement: Farbmeister
-            if colorSequence.count == 10 {
+            if colorSequence.count == 100 {
                 gcManager.reportAchievementOnce(identifier: "level10_reached", percentComplete: 100)
             }
         }
