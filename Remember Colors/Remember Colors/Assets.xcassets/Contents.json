@@ -4,20 +4,3 @@
     "version" : 1
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-let progress: Double = Double(gameplayed) / 100.0 * 100.0
-if finalScore >= 100 {
-    gcManager.reportAchievement(identifier: "played_100_games", percentComplete: 100)
-}
