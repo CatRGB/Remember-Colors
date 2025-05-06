@@ -157,61 +157,54 @@ struct ContentView: View {
 
     
     func startNextLevel() {
-        // Falls Level erreicht ist: Neue Farbe hinzufügen
         var newColorAdded = false
+
         if levelManager.levelThresholdsForNewColor.contains(colorSequence.count) {
             levelManager.addNewColors()
             newColorAdded = true
-
-                
-            /// 🎯 Achievement: Farben-Anfänger
-            if colorSequence.count == 1 {
-                gcManager.reportAchievementOnce(identifier: "first_correct_color", percentComplete: 100)
-            }
-                
-            /// 🎯 Achievment: Gedächtnisprofi
-            if colorSequence.count >= 3 {
-                gcManager.reportAchievementOnce(identifier: "perfect_3_rounds", percentComplete: 100)
-            }
-                
-            /// 🎯 Achievement: Farben-Profi
-            if colorSequence.count >= 10 {
-               gcManager.reportAchievementOnce(identifier: "ten_correct_colors", percentComplete: 100)
-            }
-                
-            /// 🎯 Achievement: Konzentrationsmeister
-            if colorSequence.count >= 5 {
-               gcManager.reportAchievementOnce(identifier: "no_mistakes_level5", percentComplete: 100)
-            }
-                
-            /// 🎯 Achievement: Farbmeister
-            if colorSequence.count == 100 {
-                gcManager.reportAchievementOnce(identifier: "level10_reached", percentComplete: 100)
-            }
         }
-        
-        // Die neue Farbe oder das neue Level vorbereiten
+
+        /// 🟡 Jetzt IMMER neue Farbe anhängen
         colorSequence.append(Int.random(in: 0..<levelManager.colors.count))
+        let currentLevel = colorSequence.count
+
+        // 🎯 Achievement-Prüfungen
+        if currentLevel == 1 {
+            gcManager.reportAchievementOnce(identifier: "first_correct_color", percentComplete: 100)
+        }
+
+        if currentLevel >= 3 {
+            gcManager.reportAchievementOnce(identifier: "perfect_3_rounds", percentComplete: 100)
+        }
+
+        if currentLevel >= 5 {
+            gcManager.reportAchievementOnce(identifier: "no_mistakes_level5", percentComplete: 100)
+        }
+
+        if currentLevel >= 10 {
+            gcManager.reportAchievementOnce(identifier: "ten_correct_colors", percentComplete: 100)
+        }
+
+        if currentLevel == 10 {
+            gcManager.reportAchievementOnce(identifier: "level10_reached", percentComplete: 100)
+        }
+
+        // Danach: Spiel vorbereiten
         colorsToTap = []
-        sequenceIndex = 0 // Wichtig: neu starten innerhalb des Levels
+        sequenceIndex = 0
         isUserInteractionEnabled = false
         isActionButtonEnabled = false
-        infoText = "Level: \(colorSequence.count)" // Level = Anzahl Farben
+        infoText = "Level: \(currentLevel)"
         gameRunning = true
-        
-        let delay  = newColorAdded ? delayWithNewColor : delayWithNewColor
-       // Wenn neue Farbe dazu kam, erst kurze Pause für Animation
-        if newColorAdded {
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                levelManager.newlyAddedColorIndex = nil
-                playSequence()
-            }
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                playSequence()
-            }
+
+        let delay = newColorAdded ? delayWithNewColor : delayWithoutNewColor
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            levelManager.newlyAddedColorIndex = nil
+            playSequence()
         }
     }
+
     
     func playSequence() {
         if sequenceIndex < colorSequence.count {

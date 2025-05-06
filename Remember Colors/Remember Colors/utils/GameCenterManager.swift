@@ -190,13 +190,27 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
     
     
     func reportAchievementOnce(identifier: String, percentComplete: Double = 100) {
+        print("🔍 Versuche Achievement zu prüfen: \(identifier)")
+
         GKAchievement.loadAchievements { achievements, error in
-            guard let achievements = achievements else { return }
-            if achievements.first(where: { $0.identifier == identifier })?.isCompleted == false {
-                self.reportAchievement(identifier: identifier, percentComplete: percentComplete)
+            guard let achievements = achievements else {
+                print("❌ Fehler beim Laden der Achievements: \(error?.localizedDescription ?? "Unbekannt")")
+                return
+            }
+
+            if let achievement = achievements.first(where: { $0.identifier == identifier }) {
+                if achievement.isCompleted {
+                    print("✅ Achievement '\(identifier)' bereits abgeschlossen.")
+                } else {
+                    print("🚀 Melde Achievement '\(identifier)' mit \(percentComplete)%")
+                    self.reportAchievement(identifier: identifier, percentComplete: percentComplete)
+                }
+            } else {
+                print("⚠️ Achievement-ID '\(identifier)' nicht gefunden.")
             }
         }
     }
+
     
     func loadAchievements() {
         GKAchievement.loadAchievements { [weak self ] achievements, error in
