@@ -9,45 +9,36 @@ import Foundation
 import SwiftUI
 
 enum ShopItems: String, CaseIterable, Identifiable {
-    case pixelMon = "pixelmon"
-    case dragonyard = "dragonyard"
-    
+    case classic = "classic"
+    case hexenHut = "hexenHut"
+    case skull = "skull"
     
     var id: String { self.rawValue }
-    
+
     var name: String {
         switch self {
-        case .pixelMon:
-            return "pixelmon"
-        case .dragonyard:
-            return "dragonyard"
+        case .classic: return "Standard"
+        case .hexenHut: return "Hexen Hut"
+        case .skull: return "Totenschädel"
         }
     }
     
-    var image: String {
+    var image: String? {
         switch self {
-        case .pixelMon:
-            return "pixelmon-image"
-        case .dragonyard:
-            return "dragonyard-image"
+        case .classic:
+            return nil // kein Bild
+        case .hexenHut:
+            return "HexenHut-image"
+        case .skull:
+            return "skull-image"
         }
     }
     
     var coins: Int {
         switch self {
-        case .pixelMon:
-            return 10
-        case .dragonyard:
-            return 200
-        }
-    }
-    
-    var previewImage: String {
-        switch self {
-        case .pixelMon:
-            return "pixelmon-preview"
-        case .dragonyard:
-            return "dragonyard-preview"
+        case .classic: return 0 // immer verfügbar
+        case .hexenHut: return 100
+        case .skull: return 200
         }
     }
 }

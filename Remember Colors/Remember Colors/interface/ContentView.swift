@@ -35,6 +35,12 @@ struct ContentView: View {
     @ObservedObject private var highscoreManager = HighscoreManager.shared
     @ObservedObject private var gcManager = GameCenterManager.shared
     @StateObject private var currencyManager = CurrencyManager()
+    
+    @EnvironmentObject var shopState: ShopState
+    var selectedSkin: ShopItems? {
+        ShopItems(rawValue: shopState.selectedSkinID)
+    }
+
 
     // Dynamisch Spaltenanzahl
     var gridColumns: [GridItem] {
@@ -65,14 +71,17 @@ struct ContentView: View {
                 if !gameEnded {
                     LazyVGrid(columns: gridColumns, spacing: 20) {
                         ForEach(0..<levelManager.colors.count, id: \.self) { index in
-                            ColorButton(
+                            SkinButton(
                                 color: levelManager.colors[index],
+                                imageName: selectedSkin?.image,
                                 isHighlighted: levelManager.colorButtonStates[index],
+                                isNewlyAdded: levelManager.newlyAddedColorIndex == index, // 👈 NEU
                                 size: buttonSize,
-                                isEnabled: isUserInteractionEnabled
-                            ) {
-                                colorButtonHandler(index)
-                            }
+                                isEnabled: isUserInteractionEnabled,
+                                action: {
+                                    colorButtonHandler(index)
+                                }
+                            )
                             .scaleEffect(levelManager.newlyAddedColorIndex == index ? 1.2 : 1.0)
                             .animation(.easeOut(duration: 0.5), value: levelManager.newlyAddedColorIndex)
                         }
@@ -128,6 +137,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            print("🎮 Aktiver Skin: \(shopState.selectedSkinID)")
             if isFirstLaunch {
                 isFirstLaunch = false
                 startNextLevel()

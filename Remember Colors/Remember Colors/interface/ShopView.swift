@@ -38,10 +38,18 @@ struct ShopView: View {
                     LazyHStack(spacing: 20) {
                         ForEach(ShopItems.allCases) { item in
                             VStack(spacing: 10) {
-                                Image(item.image)
-                                    .resizable()
-                                    .frame(width: 100, height: 100)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                if let imageName = item.image {
+                                    Image(imageName)
+                                        .resizable()
+                                        .frame(width: 100, height: 100)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                } else {
+                                    Circle()
+                                        .fill(Color.gray.opacity(0.3))
+                                        .frame(width: 100, height: 100)
+                                        .overlay(Text("🎨"))
+                                }
+
 
                                 Text(item.name)
                                     .font(.subheadline)
@@ -50,14 +58,15 @@ struct ShopView: View {
                                     Text("✅ Gekauft")
                                         .foregroundColor(.green)
                                     if shopState.selectedSkinID == item.id {
+                                        Text("🎮 Aktiv")
+                                            .foregroundColor(.blue)
+                                    } else {
                                         Button("Ausrüsten") {
                                             shopState.selectedSkinID = item.id
                                         }
                                         .buttonStyle(.bordered)
-                                    } else {
-                                        Text("🎮 Aktiv")
-                                            .foregroundColor(.blue)
                                     }
+
                                     
                                 } else {
                                     Button("Kaufen für \(item.coins)") {

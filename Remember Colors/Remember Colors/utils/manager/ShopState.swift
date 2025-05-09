@@ -28,7 +28,7 @@ class ShopState: ObservableObject {
     
     
     func isUnlocked(_ item: ShopItems) -> Bool {
-        unLockedItem.contains(item.id)
+        item == .classic || unLockedItem.contains(item.id)
     }
     
     func unlock(_ item: ShopItems) {
