@@ -11,11 +11,16 @@ import SwiftData
 @main
 struct Remember_ColorsApp: App {
     @StateObject private var gcManager = GameCenterManager.shared
+    @StateObject private var currencyManager = CurrencyManager()
+    @StateObject private var shopState = ShopState()
+
     
     var body: some Scene {
         WindowGroup {
             StartUI()
                 .environmentObject(gcManager)
+                .environmentObject(currencyManager)
+                .environmentObject(shopState)
         }
     }
 }

@@ -12,6 +12,7 @@ struct StartUI: View {
     @State private var navigateToContentView = false
     @State private var navigateToSettingsView = false
     @State private var navigateToHighscoreView = false
+    @State private var navigateToShopView = false
     @State private var startPressed = false
     
     // GameCenterManager
@@ -33,6 +34,12 @@ struct StartUI: View {
             
             if navigateToHighscoreView {
                 HighscoreView()
+                    .transition(.move(edge: .trailing))
+                    .zIndex(1)
+            }
+            
+            if navigateToShopView {
+                ShopView()
                     .transition(.move(edge: .trailing))
                     .zIndex(1)
             }
@@ -89,6 +96,14 @@ struct StartUI: View {
                         .padding(.leading, 50)
                         
                         Button("") {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                startPressed = true
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation {
+                                    navigateToShopView = true
+                                }
+                            }
                         }
                         .buttonStyle(punkteShopButton())
                         .padding(.leading, 50)
