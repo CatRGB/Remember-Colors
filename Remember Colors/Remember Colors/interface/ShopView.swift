@@ -66,7 +66,6 @@ struct ShopView: View {
                                         }
                                         .buttonStyle(.bordered)
                                     }
-
                                     
                                 } else {
                                     Button("Kaufen für \(item.coins)") {

@@ -75,7 +75,7 @@ struct ContentView: View {
                                 color: levelManager.colors[index],
                                 imageName: selectedSkin?.image,
                                 isHighlighted: levelManager.colorButtonStates[index],
-                                isNewlyAdded: levelManager.newlyAddedColorIndex == index, // 👈 NEU
+                                isNewlyAdded: levelManager.newlyAddedColorIndex == index,
                                 size: buttonSize,
                                 isEnabled: isUserInteractionEnabled,
                                 action: {

@@ -26,7 +26,7 @@ enum ShopItems: String, CaseIterable, Identifiable {
     var image: String? {
         switch self {
         case .classic:
-            return nil // kein Bild
+            return nil
         case .hexenHut:
             return "HexenHut-image"
         case .skull:
@@ -36,7 +36,7 @@ enum ShopItems: String, CaseIterable, Identifiable {
     
     var coins: Int {
         switch self {
-        case .classic: return 0 // immer verfügbar
+        case .classic: return 0
         case .hexenHut: return 100
         case .skull: return 200
         }

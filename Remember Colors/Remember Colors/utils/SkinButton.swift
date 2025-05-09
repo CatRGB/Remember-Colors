@@ -12,7 +12,7 @@ struct SkinButton: View {
     var color: Color
     var imageName: String? // wenn gesetzt → Bild statt Kreis
     var isHighlighted: Bool
-    var isNewlyAdded: Bool = false // 🆕 zusätzlicher Parameter
+    var isNewlyAdded: Bool = false
     var size: CGFloat
     var isEnabled: Bool
     var action: () -> Void
