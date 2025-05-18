@@ -39,6 +39,10 @@ struct HighscoreView: View {
                     // Online Scores
                     onlineHighscores
                         .tabItem { Label("Online", systemImage: "trophy") }
+                    
+                    // Achivements
+                    onlineAchievement
+                        .tabItem { Label("Achievements", systemImage: "star") }
                 }
                 
                 actionButtons
@@ -107,6 +111,60 @@ struct HighscoreView: View {
                             Spacer()
                             Text("\(score.value)")
                                 .bold()
+                        }
+                        .padding(8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [.red, .green, .blue, .yellow],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 3
+                                )
+                        )
+                    }
+                }
+            }
+            .scrollContentBackground(.hidden)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(
+                        LinearGradient(
+                            colors: [.red, .green, .blue, .yellow],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 3
+                    )
+            )
+            .padding()
+            .listStyle(.plain)
+        }
+    }
+    
+    private var onlineAchievement: some View {
+        VStack {
+            List {
+                if gcManager.achievmets.isEmpty {
+                    Text("Keine Achievements gefunden").foregroundColor(.gray)
+                } else {
+                    ForEach(gcManager.achievmets, id: \.identifier) { achievement in
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(achievement.identifier)
+                                    .font(.headline)
+                                Text("\(Int(achievement.percentComplete)) % abgeschlossen")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            
+                            if achievement.isCompleted {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                            }
                         }
                         .padding(8)
                         .background(

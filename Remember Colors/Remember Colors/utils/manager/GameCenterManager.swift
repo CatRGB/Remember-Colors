@@ -30,6 +30,7 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
     
     /// Geladene Top-Scores
     @Published var topScores: [GKScore] = []
+    @Published var achievmets: [GKAchievement] = []
     
     private override init() {
         super.init()
@@ -158,4 +159,69 @@ class GameCenterManager: NSObject, ObservableObject, GKGameCenterControllerDeleg
                 .present(vc, animated: true)
         }
     }
+    
+    func reportAchievement(identifier: String, percentComplete: Double) {
+        guard isAuthenticated else { return }
+        
+        let achievement = GKAchievement(identifier: identifier)
+        achievement.percentComplete = percentComplete
+        achievement.showsCompletionBanner = true
+        
+        GKAchievement.report([achievement]) { error in
+            if let error = error {
+                print("❌ Achievement Error: \(error.localizedDescription)")
+            } else {
+                print("✅ Achievement '\(identifier)' gemeldet")
+            }
+        }
+    }
+    
+    func showAchievements() {
+        guard isAuthenticated else { return }
+        
+        let vc = GKGameCenterViewController()
+        vc.viewState = .achievements
+        vc.gameCenterDelegate = self
+        
+        DispatchQueue.main.async {
+            UIApplication.rootViewController?.present(vc, animated: true)
+        }
+    }
+    
+    
+    func reportAchievementOnce(identifier: String, percentComplete: Double = 100) {
+        print("🔍 Versuche Achievement zu prüfen: \(identifier)")
+
+        GKAchievement.loadAchievements { achievements, error in
+            guard let achievements = achievements else {
+                print("❌ Fehler beim Laden der Achievements: \(error?.localizedDescription ?? "Unbekannt")")
+                return
+            }
+
+            if let achievement = achievements.first(where: { $0.identifier == identifier }) {
+                if achievement.isCompleted {
+                    print("✅ Achievement '\(identifier)' bereits abgeschlossen.")
+                } else {
+                    print("🚀 Melde Achievement '\(identifier)' mit \(percentComplete)%")
+                    self.reportAchievement(identifier: identifier, percentComplete: percentComplete)
+                }
+            } else {
+                print("⚠️ Achievement-ID '\(identifier)' nicht gefunden.")
+            }
+        }
+    }
+
+    
+    func loadAchievements() {
+        GKAchievement.loadAchievements { [weak self ] achievements, error in
+            if let achievements = achievements {
+                DispatchQueue.main.async {
+                    self?.achievmets = achievements
+                }
+            } else if let error = error {
+                print("❌ Fehler beim Laden der Achievements: \(error.localizedDescription)")
+            }
+        }
+    }
 }
+

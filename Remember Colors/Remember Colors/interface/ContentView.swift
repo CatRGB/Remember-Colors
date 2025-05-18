@@ -174,6 +174,8 @@ struct ContentView: View {
             newColorAdded = true
         }
         
+        
+        
         // Die neue Farbe oder das neue Level vorbereiten
         colorSequence.append(Int.random(in: 0..<levelManager.colors.count))
         colorsToTap = []
@@ -235,12 +237,28 @@ struct ContentView: View {
         
         let finalScore = colorSequence.count
         highscoreManager.addHighscore(level: finalScore)
+        
+        let gamePlayedCount = UserDefaults.standard.integer(forKey: "gamePlayedCount") + 1
+        UserDefaults.standard.set(gamePlayedCount, forKey: "gamePlayedCount") // ✅ speichern zuerst
+
+        let progress: Double = Double(gamePlayedCount) / 100.0 * 100.0
+        
         if gcManager.isAuthenticated {
             GameCenterManager.shared.submitScore(finalScore)
+            
+            /// 🎯 Achievement: Farb-Legende
+            if finalScore >= 50 {
+                gcManager.reportAchievementOnce(identifier: "highscore_above_50", percentComplete: 100)
+            }
+            
+            /// 🎯 Achievement: Dranbleiber – 5 Spiele gespielt
+            if gamePlayedCount >= 5 {
+                gcManager.reportAchievementOnce(identifier: "play_5_games", percentComplete: 100)
+            }
+            
+            /// 🎯 Achievement: Farben-Veteran – Fortschritt (immer melden, nicht nur ab 100)
+            gcManager.reportAchievement(identifier: "played_100_games", percentComplete: min(progress, 100.0))
         }
-        
-        currencyManager.addCoins(10)
-        
     }
     
     func colorButtonHandler(_ index: Int) {
