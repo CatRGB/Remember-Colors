@@ -12,8 +12,7 @@ import SwiftData
 struct SettingView: View {
     
     @State private var atmungszeit = false
-    @State private var isTitleMusicLocked = false
-    @State private var isSoundeffekteLocked = false
+    @State private var isVibrationLocked = false
     
     // Schwirgkeit
     @State private var selectedDifficulty: Difficulty = .light
@@ -50,17 +49,6 @@ struct SettingView: View {
                 
                 
                 LazyVGrid(columns: columns, spacing: 30) {
-                    Button("TITLE MUSIK") {
-                        isTitleMusicLocked.toggle()
-                    }
-                    .buttonStyle(titleMusicSettingButton(isTitleMusicLocked: isTitleMusicLocked))
-                    
-                    Button("SOUND EFFECTS") {
-                        isSoundeffekteLocked.toggle()
-                    }
-                    .buttonStyle(soundEffectsSettingButton(isSoundeffekteLocked: isSoundeffekteLocked))
-                    
-                    
                     Button("Bewerten") {
                         // Soll die Apple App Page
                     }
@@ -79,28 +67,14 @@ struct SettingView: View {
                     }
                     .buttonStyle(creditsSettingButton())
                 }
-                
-                VStack {
-                    Text("SCHWIRIGKEIT")
-                }
                 .padding(.top, 20)
                 
                 HStack(spacing: 20) {
                     
-                    Button("") {
-                        selectedDifficulty = .light
+                    Button("VIBRAION") {
+                        isVibrationLocked.toggle()
                     }
-                    .buttonStyle(LightnessButton(difficulty: .light, isLocked: selectedDifficulty != .light))
-                    
-                    Button("") {
-                        selectedDifficulty = .normal
-                    }
-                    .buttonStyle(HeavyButton(difficulty: .normal, isLocked: selectedDifficulty != .normal))
-                    
-                    Button("") {
-                        selectedDifficulty = .heavy
-                    }
-                    .buttonStyle(HeavyButton(difficulty: .heavy, isLocked: selectedDifficulty != .heavy))
+                    .buttonStyle(vibrationSettingButton(isVibrationLocked: isVibrationLocked))
                 }
                 .padding(.bottom, 10)
                 

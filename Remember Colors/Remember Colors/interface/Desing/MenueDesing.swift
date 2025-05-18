@@ -281,14 +281,14 @@ struct playToButton: ButtonStyle {
 }
 
 // MARK: Settings View
-struct titleMusicSettingButton: ButtonStyle {
-    var isTitleMusicLocked = false
+struct vibrationSettingButton: ButtonStyle {
+    var isVibrationLocked = false
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
         Image(systemName: "music.quarternote.3")
-            .frame(width: 50, height: 50)
+            .frame(width: 250, height: 50)
             .padding(10)
-            .background(isTitleMusicLocked ? Color.red : Color.green)
+            .background(isVibrationLocked ? Color.red : Color.green)
             .foregroundColor(.white)
             .cornerRadius(10)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
