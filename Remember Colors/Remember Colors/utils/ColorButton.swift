@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ColorButton: View {
+    @EnvironmentObject var settingsManager: SettingsManager
+    
     var color: Color
     var isHighlighted: Bool
     var size: CGFloat
@@ -15,7 +17,12 @@ struct ColorButton: View {
     var action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            if settingsManager.vibrationEnabled {
+                triggerHaptic()
+            }
+            action()
+        }) {
             Circle()
                 .fill(color)
                 .frame(width: size, height: size)

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SkinButton: View {
     
+    @EnvironmentObject var settingsManager: SettingsManager
+    
     var color: Color
     var imageName: String? // wenn gesetzt → Bild statt Kreis
     var isHighlighted: Bool
@@ -18,7 +20,12 @@ struct SkinButton: View {
     var action: () -> Void
     
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            if settingsManager.vibrationEnabled {
+                triggerHaptic()
+            }
+            action()
+        }) {
             ZStack {
                 if let imageName = imageName {
                     Image(imageName)

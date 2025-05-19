@@ -14,8 +14,8 @@ struct SettingView: View {
     @State private var atmungszeit = false
     @State private var isVibrationLocked = false
     
-    // Schwirgkeit
-    @State private var selectedDifficulty: Difficulty = .light
+    // Vibration
+    @EnvironmentObject var vibrationManager: SettingsManager
     
     // Navigation
     @State private var startPressed = false
@@ -71,17 +71,18 @@ struct SettingView: View {
                 
                 HStack(spacing: 20) {
                     
-                    Button("VIBRAION") {
-                        isVibrationLocked.toggle()
+                    Button("VIBRATION") {
+                        SettingsManager.shared.vibrationEnabled.toggle()
                     }
-                    .buttonStyle(vibrationSettingButton(isVibrationLocked: isVibrationLocked))
+                    .buttonStyle(vibrationSettingButton(isVibrationLocked: !SettingsManager.shared.vibrationEnabled))
                 }
                 .padding(.bottom, 10)
                 
                 
-                
-                
                 VStack(spacing: 20) {
+                    HapticTestView()
+                        .padding(.horizontal)
+                    
                     Button("") {
                         withAnimation(.easeInOut(duration: 0.5)) {
                             startPressed = true

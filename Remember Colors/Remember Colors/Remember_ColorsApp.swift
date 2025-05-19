@@ -13,6 +13,7 @@ struct Remember_ColorsApp: App {
     @StateObject private var gcManager = GameCenterManager.shared
     @StateObject private var currencyManager = CurrencyManager()
     @StateObject private var shopState = ShopState()
+    @StateObject private var settingsManager = SettingsManager.shared
 
     
     var body: some Scene {
@@ -21,6 +22,7 @@ struct Remember_ColorsApp: App {
                 .environmentObject(gcManager)
                 .environmentObject(currencyManager)
                 .environmentObject(shopState)
+                .environmentObject(settingsManager)
         }
     }
 }

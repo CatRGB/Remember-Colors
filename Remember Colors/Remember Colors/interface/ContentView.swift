@@ -35,6 +35,7 @@ struct ContentView: View {
     @ObservedObject private var highscoreManager = HighscoreManager.shared
     @ObservedObject private var gcManager = GameCenterManager.shared
     @StateObject private var currencyManager = CurrencyManager()
+    @EnvironmentObject var settingsManager : SettingsManager
     
     @EnvironmentObject var shopState: ShopState
     var selectedSkin: ShopItems? {
@@ -214,6 +215,12 @@ struct ContentView: View {
     }
     
     func flash(buttonIndex: Int) {
+        if settingsManager.vibrationEnabled {
+            let color = levelManager.colors[buttonIndex]
+            let style = feedbackStyle(for: color)
+            triggerHaptic(intensity: style)
+        }
+
         withAnimation(Animation.easeInOut(duration: 0.5)) {
             self.levelManager.colorButtonStates[buttonIndex].toggle()
         }
