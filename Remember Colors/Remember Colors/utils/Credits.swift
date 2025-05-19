@@ -27,7 +27,8 @@ struct Credits: View {
                                         
                     Vielen Dank auch an die Tester:
 
-                    - Meine Familie  
+                    - Meine Familie
+                    - Jonah Richter
                     - Tee ☕  
                     - Und meiner Geduld!
                                         
